@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container welcome-container text-center mt-5">
+    <h3 class="title animate__animated animate__fadeIn ext-center mb-4">Catálogo de Vehículos</h3>
+
+    <div class="mt-4 animate__animated animate__fadeIn">
+        <img src="{% static 'images/hyundai_suv.jpeg' %}" class="img-fluid shadow-lg" alt="Hyundai SUV" style="max-width: 100%; height: auto; border-radius: 10px;">
+    </div>
+
+</div>
+{% endblock %}

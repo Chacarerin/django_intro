@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center align-items-center mt-5 animate__animated animate__fadeIn">
+    <h3 class="text-center mb-4 animate__animated animate__fadeIn">Listado de Vehículos</h3>
+
+    <div class="card shadow-lg custom-form-container animate__animated animate__fadeIn" style="max-width: 1000px; width: 100%;">
+        <div class="card-body">
+            <div class="table-responsive"> <!-- Hace la tabla responsive -->
+                <table id="vehiculo-table" class="table table-hover table-striped table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Marca</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Modelo</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Serial Carrocería</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Serial Motor</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Categoría</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;">Condición de Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vehiculo in vehiculos %}
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.marca }}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.modelo }}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.serial_carroceria }}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.serial_motor }}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.categoria }}</td>
+                            <td style="text-align: center; vertical-align: middle;">{{ vehiculo.precio|floatformat:2 }} USD</td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                {% if vehiculo.precio < 10000 %}
+                                    Bajo
+                                {% elif vehiculo.precio >= 10000 and vehiculo.precio < 20000 %}
+                                    Medio
+                                {% elif vehiculo.precio >= 20000 %}
+                                    Alto
+                                {% else %}
+                                    Negativo
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Botón para exportar a Excel -->
+            <div class="d-grid mt-4">
+                <button id="export-btn" class="mt-3">Exportar a Excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

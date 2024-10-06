@@ -1,0 +1,227 @@
+/* Estilo general para ambos temas */
+body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Suaviza la transición entre temas */
+}
+
+/* Tema claro (por defecto) */
+body {
+    background-color: #F7F9FC;
+    color: #2E3A45;
+}
+
+/* Estilos para el tema claro */
+body {
+    --form-bg: #F7F9FC;
+    --form-text: #2E3A45;
+    --btn-bg: #F7F9FC; 
+    --btn-text: #2E3A45;
+    --btn-bg-hover: #2E3A45;
+    --btn-text-hover: #F7F9FC;
+    --navbar-toggler-border: #2E3A45; /* Color del borde del botón en tema claro */
+    --navbar-toggler-icon-color: #2E3A45; /* Texto blanco cuando se hace hover en tema claro */
+    --navbar-toggler-border: #F7F9FC; /* Color del borde del botón en tema oscuro */
+    --navbar-toggler-icon-color: #F7F9FC;
+    --navbar-collapse-bg: #F7F9FC;
+}
+
+/* Estilos para el tema oscuro */
+body.dark-theme {
+    --form-bg: #2E3A45;
+    --form-text: #F7F9FC;
+    --btn-bg: #2E3A45; 
+    --btn-text: #F7F9FC;
+    --btn-bg-hover: #F7F9FC;
+    --btn-text-hover: #2E3A45;
+    --navbar-collapse-bg: #2E3A45; /* Texto oscuro cuando se hace hover en tema oscuro */
+}
+
+
+/* FORMS */
+
+
+.custom-form-container {
+    background-color: var(--form-bg);
+    color: var(--form-text);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    max-width: 700px;
+    width: 100%;
+    min-width: 600px;
+}
+
+/* botón */
+.custom-form-container button {
+    width: 100%; /* El botón ocupa todo el ancho */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--btn-bg); /* Color de fondo del botón que cambia según el tema */
+    color: var(--btn-text); /* Color del texto del botón que cambia según el tema */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para fondo y texto */
+}
+
+/* Hover para el botón */
+.custom-form-container button:hover {
+    background-color: var(--btn-bg-hover); /* Color de fondo del botón al hacer hover */
+    color: var(--btn-text-hover); /* Color del texto al hacer hover */
+}
+
+
+/* Estilos de los inputs */
+.custom-form-container input,
+.custom-form-container textarea,
+.custom-form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: white;
+    color: #333;
+}
+
+/* TABLA LISTA VEHICULOS */
+
+/* botón */
+
+#export-btn {
+    width: 10%; /* El botón ocupa todo el ancho */
+    margin: 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--btn-bg); /* Color de fondo del botón que cambia según el tema */
+    color: var(--btn-text); /* Color del texto del botón que cambia según el tema */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para fondo y texto */
+}
+
+/* Hover para el botón */
+#export-btn:hover {
+    background-color: var(--btn-bg-hover); /* Color de fondo del botón al hacer hover */
+    color: var(--btn-text-hover); /* Color del texto al hacer hover */
+}
+
+
+/* NAVBAR */
+
+
+.navbar {
+    background-color: #212936; /* Color de fondo del navbar en tema claro */
+    color: hsl(0, 0%, 100%); /* Color del texto del navbar en tema claro */
+}
+
+.navbar .nav-link {
+    color: hsl(0, 0%, 100%); /* Color del texto de los enlaces en tema claro */
+}
+
+.navbar .nav-link:hover {
+    color: #ce8147; /* Color de los enlaces al pasar el ratón en tema claro */
+}
+
+/* Tema oscuro (aplicado cuando el body tiene la clase dark-theme) */
+body.dark-theme {
+    background-color: #2E3A45;
+    color: #F7F9FC;
+}
+
+.navbar.dark-theme {
+    background-color: #1C1E26; /* Color de fondo del navbar en tema oscuro */
+    color: #F7F9FC; /* Color del texto del navbar en tema oscuro */
+}
+
+.navbar.dark-theme .nav-link {
+    color: #F7F9FC; /* Color del texto de los enlaces en tema oscuro */
+}
+
+.navbar.dark-theme .nav-link:hover {
+    color: #ce8147; /* Color de los enlaces al pasar el ratón en tema oscuro */
+}
+
+.navbar-brand i {
+    margin-right: 8px; /* Añade un pequeño espacio entre el ícono y el texto */
+    font-size: 1.5rem; /* Aumenta el tamaño del ícono */
+    color: hsl(0, 0%, 48%);
+}
+
+.navbar-brand {
+    font-size: 1.2rem; /* Ajusta el tamaño del texto si lo deseas */
+    color: hsl(0, 0%, 48%);
+}
+
+.navbar-brand:hover {
+    color: #ce8147 !important; /* Cambia el color del texto a amarillo al hacer hover */
+}
+
+.navbar-toggler {
+    border-color: var(--navbar-toggler-border); /* Cambia el color del borde del botón */
+}
+
+/* Efecto hover para los iconos de cambio de tema */
+#theme-toggle {
+    transition: transform 0.3s ease; /* Suaviza la transformación al hacer hover */
+    background-color: transparent; /* Fondo transparente para que no interfiera con el estilo del navbar */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a "pointer" */
+}
+
+#theme-icon {
+    transition: color 0.3s ease; /* Suaviza el cambio de color */
+    color: hsl(0, 0%, 48%); /* Color visible para ambos temas (amarillo dorado) */
+    font-size: 1.5rem; /* Asegurar un tamaño visible para el ícono */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transiciones suaves para cambios de tema y hover */
+}
+
+#theme-toggle:hover #theme-icon {
+    color: #ce8147; /* Cambia el color del icono a amarillo dorado en hover */
+    transform: scale(1.6); /* Aumenta el tamaño del botón en un 20% al hacer hover */
+}
+
+/* Título */
+h2 {
+    color: var(--form-text);
+    margin-bottom: 20px; 
+}
+
+
+
+/* FOOTER */
+
+footer {
+    background-color: #2E3A45;
+    color: #F7F9FC; /* Asegura que todo el texto sea blanco */
+    margin-top: 80px; /* Margen superior personalizado */
+}
+  
+footer h5,
+footer p,
+footer ul li,
+footer a {
+    color: #e9ebed; /* Garantiza que los títulos, párrafos, listas y enlaces sean blancos */
+}
+  
+footer a:hover {
+    color: #ffcc00; /* Cambia el color de los enlaces al pasar el cursor */
+}
+
+/* Sección para los iconos de redes sociales en el footer */
+
+/* Estilos generales para los iconos de redes sociales */
+.social-icons {
+    color: #F7F9FC; /* Color de los iconos (blanco) */
+    font-size: 24px; /* Tamaño base de los iconos */
+     /* Transición suave en el tamaño y color */
+    color: #ffcc00; /* Cambia el color a amarillo al hacer hover */
+}
+  
+  /* Efecto hover en los iconos de redes sociales */
+.fa-facebook-f:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-linkedin-in:hover {
+    transform: scale(1.6); /* Efecto de aumento al pasar el mouse */
+    transition: transform 0.5s ease-in-out, color 0.3s ease-in-out;
+}    
+
