@@ -1,0 +1,573 @@
+0) Crear y/o activar ambiente virtual adecuado al caso.
+   En el caso de ser un entorno nuevo, instalar Django con:
+
+   pip install django
+
+1) Crear proyecto. En la carpeta de su elección, abrir el terminal y ejecutar:
+    
+    mkdir proyecto_vehiculos_django
+    cd proyecto_vehiculos_django
+
+    django-admin startproject config .
+        
+    python manage.py startapp vehiculo
+
+2) Registrar la aplicación "vehiculo".  En el settings.py:
+  INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "vehiculo",
+  ] 
+
+3) Probar el avance hasta ahora. En el terminal de VSCode, inicie el servidor:
+
+    python manage.py runserver
+
+4) Abra el navegador web y visite:   http://localhost:8000
+
+    Deberá observar el cohete de Django.
+
+    Al regresar al VSCode, corte el servidor. En el terminal presione CTRL+C (varias veces)
+
+5) Ajuste el urls.py dentro de la carpeta "config".
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+  path("admin/", admin.site.urls),
+  path("", include("vehiculo.urls")),
+]
+
+
+6) Crear el archivo urls.py dentro de la carpeta "vehiculo" y agregue lo siguiente:
+
+from django.urls import path
+from vehiculo.views import index, CustomLoginView, CustomLogoutView, RegisterView
+
+urlpatterns = [
+    path('', index, name='index'),
+    path('accounts/login/', CustomLoginView.as_view(), name='login'),
+    path('accounts/logout/', CustomLogoutView.as_view(), name='logout'),
+    path('accounts/register/', RegisterView.as_view(), name='register'),
+]
+
+
+
+7) Edite el archivo views.py dentro de la carpeta "vehiculo" y agregue lo siguiente:
+
+from django.shortcuts import render
+
+def index(request):
+  context = {}
+
+  return render(request, "index.html", context)
+
+8) Dentro de la carpeta "vehiculo", crear la carpeta "templates".
+
+9) Dentro de "/vehiculo/templates/" crea el archivo index.html y agrega el siguiente contenido:
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+      <h1> Catálogo de Vehículos </h1>
+    {% endblock %}
+
+10) Dentro de "/vehiculo/templates/" crea el archivo base.html y agrega el siguiente contenido:
+
+<!doctype html>
+<html lang="en">
+
+<head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="xxx">
+  <meta name="description" content="Proyecto de certficación Talento Digital">
+  <meta name="keywords" content="....">
+
+  <title>Vehículos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<body>
+
+  <header>
+    {% include 'header.html' %}
+  </header>
+
+  {% block message %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+  {% endif %}
+  {% endblock %}
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    {% include 'footer.html' %}
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block js %}
+  {% endblock %}
+</body>
+
+</html>
+
+
+11) Dentro de "/vehiculo/templates/" crea el archivo header.html y agrega el siguiente contenido:
+
+<nav class="navbar navbar-expand-lg bg-dark text-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="#">Vehículos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Agregar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Listar</a>
+          </li>
+          
+        </ul>
+
+        <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <form action="{% url 'logout' %}" method="post">
+            <label class="fs-5 text-warning me-3">Hola, {{ user.first_name }} </label>
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" type="submit">Salir</button>
+          </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'register' %}" class="btn btn-outline-success btn-sm ms-2">Registro</a>
+        </li>
+        {% endif %}
+      </ul>
+      </div>
+    </div>
+  </nav>
+
+
+11) Dentro de "/vehiculo/templates/" crea el archivo footer.html y agrega el siguiente contenido:
+
+<h5> Este es el footer </h5>      (personalice a su gusto)
+
+
+12) Crear modelos en el archivo models.py. Agregue:
+
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Vehiculo(models.Model):
+  # Opciones por Marca
+  MARCA = (
+      ('FIAT', 'Fiat'),
+      ('FORD', 'Ford'),
+      ('CHEVROLET', 'Chevrolet'),
+      ('TOYOTA', 'Toyota'),
+  )
+  # Opciones por Marca
+  CATEGORIA = (
+      ('PARTICULAR', 'Particular'),
+      ('TRASPORTE', 'Transporte'),
+      ('CARGA', 'Carga'), 
+  )
+
+    # Campos del modelo
+  marca = models.CharField(max_length=20, choices=MARCA, default='FORD')
+  modelo = models.TextField(max_length=100)
+  serial_carroceria = models.TextField(max_length=50)
+  serial_motor = models.TextField(max_length=50)
+  categoria = models.CharField(max_length=20, choices=CATEGORIA, default='PARTICULAR')
+  precio = models.FloatField()
+  f_creacion = models.DateTimeField(auto_now_add=True)
+  f_modificado = models.DateTimeField(auto_now = True)
+
+  def __str__(self):
+      return self.modelo
+
+
+13) Pasar al siguiente paso
+
+
+14) Creación de sistema de login y registro. En la carpeta "vehiculo" crear sub-carpeta "registration".
+    
+15) Dentro de /vehiculo/registration crear archivo "login.html" y agregue el siguiente contenido:
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="text-center my-4">Ingrese a su cuenta:</h3>
+<div class="row">
+	<div class="col-4 offset-4">
+		{% if form.errors %}
+		<div class="row">
+			<div class="col">
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<strong>Usuario y contraseña no coinciden</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		<form action="{% url 'login' %}" method="post">
+			{% csrf_token %}
+			<div class="mb-3">
+				<label for="username" class="form-label">Email<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="username" name="username" required>
+                {% if form.username.errors %}
+                    <div class="error-message">{{ form.username.errors.0 }}</div>
+                {% endif %}
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Contraseña<span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                {% if form.password.errors %}
+                    <div class="error-message">{{ form.password.errors.0 }}</div>
+                {% endif %}
+			</div>
+			<button type="submit" class="btn btn-primary">Ingresar</button>
+		</form>
+		<p class="mt-3">Si no se ha registrado, puede hacerlo <a href="{% url 'register' %}">AQUÍ</a></p>
+	</div>
+</div>
+{% endblock %}
+
+
+16) Dentro de /vehiculo/registration crear archivo "register.html" y agregue el siguiente contenido:
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h3 class="text-center my-4">Registro de Usuario</h3>
+  <form action="{% url 'register' %}" method="POST" id="form">
+    {% csrf_token %}
+    <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
+        <div class="col-12 col-md-6">
+            <label for="first_name" class="custom-label">Nombre<span class="text-danger">*</span></label>
+            <input name="first_name" type="text" class="form-control custom-input" required>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="last_name" class="custom-label">Apellido<span class="text-danger">*</span></label>
+            <input name="last_name" type="text" class="form-control custom-input" required>
+        </div>
+        <div class="col-12">
+            <label for="email" class="custom-label">Email<span class="text-danger">*</span></label>
+            <input name="email" type="email" class="form-control custom-input" required>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="password1" class="custom-label">Contraseña<span class="text-danger">*</span></label>
+            <input name="password1" type="password" class="form-control custom-input" required>
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="password2" class="custom-label">Confirma Contraseña<span class="text-danger">*</span></label>
+            <input name="password2" type="password" class="form-control custom-input" required>
+        </div>
+        <div class="col-12">
+            <div class="d-grid">
+                <button class="btn btn-secondary btn-lg" type="submit">Registrar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+</div>
+
+{% endblock %}
+
+
+17) Modificar el archivo views.py, agregando nuevas importaciones y clases ():
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth import authenticate, login
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from .models import User
+
+def index(request):
+    context = {}
+
+    return render(request, "index.html", context)
+
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'registration/register.html')
+
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match')
+            return redirect(reverse('register'))  
+        user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name)
+        user.is_active = True
+        user.save()
+        user = authenticate(username=email, password=password1)
+        if user is not None:
+            login(request, user)
+        messages.success(request, 'Usuario creado exitosamente')
+        return redirect('index')
+    
+class CustomLoginView(SuccessMessageMixin, LoginView):
+    success_message = "Sesion Iniciada Exitosamente"
+    template_name = 'registration/login.html'  
+    redirect_authenticated_user = True
+    
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.add_message(request, messages.WARNING, "Sesion Cerrada Exitosamente")
+        return response
+
+XX) Ejecutar migraciones:
+
+    python manage.py makemigrations
+    python manage.py migrate
+
+
+18) Registrar el modelo en al admin.py
+
+from django.contrib import admin
+from .models import Vehiculo
+
+admin.site.register(Vehiculo)
+
+19) Crear super-usuario (usuario: admin,   password: admin)
+
+En el terminal, ejecute:
+
+  python manage.py createsuperuser
+
+20) Ajustes en settings.py
+Al final del archivo agregar:
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
+21) Inicie el servidor y pruebe el sitio. Intente crear un nuevo usuario y luego haga login con el mismo.
+
+
+22) Creación de formulario de ingreso de vehículos.
+    Dentro de la carpeta "vehiculo" crear el archivo forms.py y agregue lo siguiente:
+
+from django import forms
+from .models import Vehiculo
+
+class VehiculoForm(forms.ModelForm):
+    class Meta:
+        model = Vehiculo
+        fields = "__all__" 
+
+
+23) Modifica el views.py. Agrega la vista que controla el formulario:
+
+* En la parte superior (importaciones), agregue:
+
+from .forms import VehiculoForm
+from django.http import HttpResponseRedirect
+
+* Y al final del archivo, agregue:
+
+def vehiculoform_view(request):
+    context ={}
+    form = VehiculoForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Vehículo ingresado exitosamente')
+        return HttpResponseRedirect('/')
+    
+    context['form']= form
+    return render(request, "vehiculo_add.html", context)
+
+
+24) En la carpeta "templates" agregue el archivo "vehiculo_add.html" con el siguiente contenido:
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-3">
+      <form action="" method="POST">
+          {% csrf_token %} 
+          {{ form.as_p }}
+          <input type="submit" value="Enviar" />
+      </form>
+  </div>
+{% endblock %}
+
+
+25) Reiniciar servidor y probar el sitio.
+
+
+26) Agregar los permisos solicitados. En el archivo models.py, dentro de la clase Vehiculo,
+    antes de la sobreescritura del __str__ agregar:
+
+    class Meta:
+      permissions = ( ("visualizar_catalogo", "Visualizar Catálogo de Vehículos"),)
+
+Luego de esta edición, ejecute migraciones.
+
+27) Editar el archivo views.py
+
+* Agregue las siguientes importaciones:
+
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from .models import Vehiculo   # ojo: No borrar ninguna importación anterior
+
+* Modifique la vista "RegisterView":
+
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'registration/register.html')
+
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match')
+            return redirect(reverse('register'))  
+        user = User.objects.create_user(username=email, email=email, password=password1, first_name=first_name, last_name=last_name)
+        user.is_active = True
+        user.save()
+        
+        content_type = ContentType.objects.get_for_model(Vehiculo)
+        visualizar_catalogo = Permission.objects.get(codename='visualizar_catalogo', content_type=content_type )
+        # Agregamos el permiso al usuario
+        user.user_permissions.add(visualizar_catalogo)
+
+        user = authenticate(username=email, password=password1)
+        if user is not None:
+            login(request, user)
+        messages.success(request, 'Usuario creado exitosamente')
+        return redirect('index')
+
+
+28) Implementemos el listado de vehículos. 
+    En la carpeta "templates", crear archivo "vehiculo_list.html" y coloque el siguiente contenido:
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+ <h2> Listado de vehiculos </h2>
+
+ <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Marca</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Serial Carroceria</th>
+            <th scope="col">Serial Motor</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Condición de Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for vehiculo in vehiculo_list %}
+        <tr>
+            <td>{{ vehiculo.marca }}</td>
+            <td>{{ vehiculo.modelo }}</td>
+            <td>{{ vehiculo.serial_carroceria }}</td>
+            <td>{{ vehiculo.serial_motor }}</td>
+            <td>{{ vehiculo.categoria }}</td>
+            <td>{{ vehiculo.precio }}</td>
+            {% if vehiculo.precio >= 0 and vehiculo.precio < 10000 %}
+                <td>Bajo</td>
+            {% elif vehiculo.precio >= 10000 and vehiculo.precio < 30000 %}
+                <td>Medio</td>
+            {% elif vehiculo.precio > 30000 %}
+                <td>Alto</td>
+            {% else %}
+                <td>Negativo</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %} 
+
+
+29) Agregar la siguiente ruta a /vehiculo/urls.py
+
+      path('vehiculo/list/', vehiculolist_view, name="vehiculo_list"),
+
+30) Modificar nuevamente el archivo views.py
+
+* Agregar la siguiente vista:
+
+@login_required
+def vehiculolist_view(request):
+    if not request.user.has_perm('vehiculo.visualizar_catalogo'):
+        messages.warning(request, 'No posees los permisos para acceder a este recurso!')
+        return HttpResponseRedirect('/')
+
+    lista_vehiculos = Vehiculo.objects.all()
+    context = { "vehiculo_list": lista_vehiculos }
+    return render(request, "vehiculo_list.html", context)
+
+31) Modificar los "href" de las opciones de menú en el header.html
+
+En Agregar:   href="{% url 'vehiculo_add' %}"
+En Listar:    href="{% url 'vehiculo_list' %}"
+
+32) DESAFÍO: Modificar el template vehiculo_add.html para que renderice con Crispy-forms

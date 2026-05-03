@@ -37,4 +37,4 @@ Para correr cualquiera de los proyectos:
    ```
    
 ---
-*Desarrollado con ❤️ por Rubén Schnettler*
+*Desarrollado por Rubén Schnettler.*
