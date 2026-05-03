@@ -1,11 +1,18 @@
-# Semana 7: Drilling
+# 🗄️ Semana 7: ORM y Relaciones de Datos
 
-Introducción profunda al Object-Relational Mapping (ORM) de Django, diseñado para abstraer y gestionar la base de datos de manera programática.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-## Objetivos del Ejercicio
-- **Definición de Modelos:** Creación de entidades complejas con múltiples tipos de campos (CharField, DateField, IntegerField).
-- **Tipos de Relación:** Modelado de bases de datos mediante relaciones One-To-Many (ForeignKey) y Many-To-Many.
-- **Consultas Interactivas:** Uso de la API de QuerySets a través de la shell de Django para insertar, actualizar, recuperar y eliminar datos de prueba.
+El paradigma relacional de bases de datos se aborda desde la perspectiva de la Programación Orientada a Objetos. El objetivo es diseñar esquemas normalizados utilizando el Object-Relational Mapping (ORM) integrado.
+
+## 📌 Contenidos Principales
+- **Modelado de Entidades:** Traducción de reglas de negocio a clases de Python, definiendo atributos (campos) y restricciones nativas (longitud, unicidad).
+- **Relaciones Estructurales:** Implementación de claves foráneas `ForeignKey` y `ManyToManyField` para vincular información atómicamente, asegurando la integridad referencial (e.g. cascadas de eliminación con `on_delete=models.CASCADE`).
+- **Consultas Interactivas (QuerySets):** Extracción de datos aplicando filtros avanzados a través de la terminal interactiva interactiva `manage.py shell`, comprendiendo la evaluación perezosa (*Lazy Evaluation*) de Django.
+
+## ⚙️ Tecnologías y Frameworks Aplicados
+- **Django ORM:** Abstracción que traduce métodos en sentencias SQL eficientes y parametrizadas, protegiendo por diseño el aplicativo contra ataques de inyección SQL (SQLi).
 
 ---
 *Desarrollado por Rubén Schnettler.*

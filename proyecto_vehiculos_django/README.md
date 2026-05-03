@@ -1,12 +1,17 @@
-# Proyecto Catálogo de Vehículos
+# 🚗 Proyecto Catálogo de Vehículos
 
-Proyecto integrador que consolida todos los aprendizajes iniciales en una aplicación unificada para el registro, consulta y administración de vehículos.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 
-## Características Técnicas
-- **Flujo Completo MVT:** La arquitectura entera (Modelos, Vistas y Templates) trabajando en sincronía.
-- **Formularios Dinámicos:** Captura de datos de marca, modelo y año utilizando ModelForms seguros.
-- **Vistas List/Detail:** Despliegue del catálogo general de vehículos y navegación hacia los detalles específicos de cada unidad.
-- **Panel Administrativo:** Permite a los gestores operar la base de datos sin necesidad de interfaz frontend en caso de soporte rápido.
+Proyecto que funge como hito integrador. A diferencia de ejercicios aislados, esta aplicación orquesta de forma completa y simultánea todas las capas de la arquitectura MVT (Modelo-Vista-Plantilla).
+
+## 📌 Contenidos Principales
+- **Cohesión Estructural (MVT):** Demostración de cómo un Modelo interroga la base de datos, transfiere el conjunto de resultados a una Vista, y cómo esta última formatea el contexto final que inyecta en el Template HTML.
+- **Captura Transaccional Segura:** Empleo de componentes formales (ModelForms) que automatizan validaciones a nivel de backend y mitigan el riesgo de inyección de datos corruptos antes de impactar el catálogo.
+- **Jerarquía de Vistas (List/Detail):** Patrón fundacional en el desarrollo web, presentando un inventario resumido navegable hacia las características microscópicas de un vehículo en particular.
+
+## ⚙️ Tecnologías y Frameworks Aplicados
+- **Django Form Engine:** Se estudia académicamente la abstracción de campos HTML y su vinculación estricta con las restricciones del modelo original, reduciendo el riesgo de errores de validación humanos.
 
 ---
 *Desarrollado por Rubén Schnettler.*
