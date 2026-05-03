@@ -1,40 +1,37 @@
-# 🚀 Introducción a Django
+# Introducción a Django y Arquitectura MVT
 
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-Repositorio destinado a los primeros pasos y proyectos iniciales utilizando el framework web **Django**. 
+Este repositorio documenta el proceso de aprendizaje secuencial y progresivo en el framework **Django**. Contiene ejercicios semanales ("drilling" y "rebound") diseñados para consolidar los conceptos clave de la arquitectura Modelo-Vista-Plantilla (MVT), desde la configuración inicial hasta el despliegue de aplicaciones robustas.
 
-Encontrarás aplicaciones simples y ejercicios guiados que cubren los fundamentos de la arquitectura MVT (Model-View-Template).
+## Catálogo de Módulos
 
-## 🗂️ Proyectos Incluidos
+El repositorio está estructurado cronológicamente. Cada subcarpeta contiene un proyecto Django independiente con su propia documentación específica:
 
-### 1. `proyecto_vehiculos_django`
-Aplicación básica para el registro y visualización de un catálogo de vehículos. Demuestra el uso de Modelos simples, vistas basadas en funciones/clases y el sistema de plantillas de Django.
+* **Semana 1:**
+  * `s01drilling`: Configuración inicial del proyecto, creación de apps, rutas básicas (urls) y primeras vistas estáticas.
 
-### 2. `s01drilling`
-Ejercicio práctico de la primera semana de aprendizaje. Configuración inicial de un proyecto Django, creación de apps, rutas básicas (urls) y las primeras vistas.
+* **Semanas 5 y 6:**
+  * `s05drilling` / `s05drilling_v2`: Profundización en vistas, paso de contexto a las plantillas y herencia de templates.
+  * `s06drilling` / `s06rebound`: Integración de formularios (Forms y ModelForms), validación de datos del lado del servidor y manejo de peticiones POST.
 
-### 3. `m7rebound_drilling`
-*(Nota: Este módulo contiene su propio repositorio con foco en Base de Datos y ORM).*
+* **Semanas 7 y 8:**
+  * `s07drilling` / `s07rebound`: Uso avanzado del ORM, relaciones entre modelos y vistas basadas en clases (CBVs).
+  * `s08drilling` / `s08rebound`: Implementación de sistemas de autenticación, control de acceso (decorators y mixins) y gestión de sesiones de usuario.
 
----
+* **Proyectos Integradores:**
+  * `proyecto_vehiculos_django`: Catálogo básico demostrando el flujo completo MVT.
+  * `site_django` / `web_django`: Aplicaciones con diseño mejorado, integrando archivos estáticos (CSS/JS).
+  * `m7rebound_drilling`: (Contiene su propio repositorio con foco avanzado en Base de Datos y PostgreSQL).
 
-## 🛠️ Cómo Ejecutar
+## Ejecución de Proyectos
 
-Para correr cualquiera de los proyectos:
-1. Clona este repositorio.
-2. Navega al directorio del proyecto (por ejemplo `cd proyecto_vehiculos_django`).
-3. Crea tu entorno virtual y actívalo.
-4. Instala Django si no está instalado globalmente (`pip install django`).
-5. Realiza las migraciones:
-   ```bash
-   python manage.py migrate
-   ```
-6. Levanta el servidor:
-   ```bash
-   python manage.py runserver
-   ```
-   
+Para levantar cualquier módulo localmente:
+1. Navega al directorio deseado.
+2. Asegúrate de tener tu entorno virtual activo.
+3. Ejecuta las migraciones pertinentes: `python manage.py migrate`.
+4. Levanta el servidor: `python manage.py runserver`.
+
 ---
 *Desarrollado por Rubén Schnettler.*
